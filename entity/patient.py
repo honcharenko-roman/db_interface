@@ -1,12 +1,12 @@
 class Patient(object):
 
-    def __init__(self, medic_id=None, timestamp=None, content=None):
+    def __init__(self, first_name=None, last_name=None, phone=None, email=None, medic_id=None):
         self._id = None
-        self._first_name = medic_id
-        self._last_name = timestamp
-        self._phone = content
-        self._email = content
-        self._medic_id = content
+        self._first_name = first_name
+        self._last_name = last_name
+        self._phone = phone
+        self._email = email
+        self._medic_id = medic_id
 
     @property
     def id(self):
@@ -82,9 +82,3 @@ class Patient(object):
 
     def __repr__(self):
         return f'{self.id=}, {self.first_name=}, {self.last_name=}, {self.phone=},  {self.email=},  {self.medic_id=}'
-
-    def data(self):
-        return self.medic_id, self.timestamp, self.content
-
-    def update(self, data):
-        _, self.medic_id, self.timestamp, self.content = data

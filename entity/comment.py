@@ -54,9 +54,3 @@ class Comment(object):
 
     def __repr__(self):
         return f'{self.id=}, {self.medic_id=}, {self.timestamp=}, {self.content=}'
-
-    def data(self):
-        return self.medic_id, self.timestamp, self.content
-
-    def update(self, data):
-        _, self.medic_id, self.timestamp, self.content = data

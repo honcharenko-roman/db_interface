@@ -23,3 +23,4 @@ class Category(object):
     @name.deleter
     def name(self):
         del self._name
+
