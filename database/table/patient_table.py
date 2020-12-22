@@ -25,7 +25,6 @@ class PatientTable(metaclass=Singleton):
                         REFERENCES {CommentTable.table_name} ({CommentTable.medic_id_field_name}) 
                 FOREIGN KEY ({PatientTable._id_field_name})
                         REFERENCES {FavouriteTable.table_name} ({FavouriteTable.patient_id_field_name}) 
-
             )'''
         )
 
