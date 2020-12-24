@@ -16,3 +16,17 @@ class Table:
         return execute_statement(
             f'SELECT * FROM {self.table_name}',
         ) or []
+
+    def get_column_values(self, column):
+        return execute_statement(
+            f'SELECT ({column}) FROM {self.table_name}',
+        ) or []
+
+    def get_dataset(self):
+        data = {}
+
+        for item in self.get_all():
+            for key in vars(item).keys():
+                data[key[1:]] = self.get_column_values(key[1:])
+
+        return data

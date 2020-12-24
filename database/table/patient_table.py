@@ -7,10 +7,10 @@ from entity.patient import Patient
 class PatientTable(Table, metaclass=Singleton):
     table_name: str = 'Patient'
     id_field_name: str = 'id'
-    _first_name_field_name: str = 'first_name'
-    _last_name_field_name = 'last_name'
-    _phone_field_name = 'phone'
-    _email_field_name = 'email'
+    first_name_field_name: str = 'first_name'
+    last_name_field_name = 'last_name'
+    phone_field_name = 'phone'
+    email_field_name = 'email'
     medic_id_field_name: str = 'medic_id'
 
     def __init__(self):
@@ -18,10 +18,10 @@ class PatientTable(Table, metaclass=Singleton):
         execute_statement(
             f'''CREATE TABLE if not exists {PatientTable.table_name} (
                 {PatientTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
-                {PatientTable._first_name_field_name} TEXT, 
-                {PatientTable._last_name_field_name} TEXT, 
-                {PatientTable._phone_field_name} TEXT, 
-                {PatientTable._email_field_name} TEXT, 
+                {PatientTable.first_name_field_name} TEXT, 
+                {PatientTable.last_name_field_name} TEXT, 
+                {PatientTable.phone_field_name} TEXT, 
+                {PatientTable.email_field_name} TEXT, 
                 {PatientTable.medic_id_field_name} INTEGER 
                     REFERENCES {MedicTable.table_name} ({MedicTable.id_field_name})
             )'''
@@ -31,10 +31,10 @@ class PatientTable(Table, metaclass=Singleton):
     def insert(patient: Patient):
         execute_statement(
             f'''INSERT INTO {PatientTable.table_name} 
-                            ({PatientTable._first_name_field_name}, 
-                            {PatientTable._last_name_field_name},
-                            {PatientTable._phone_field_name},
-                            {PatientTable._email_field_name},
+                            ({PatientTable.first_name_field_name}, 
+                            {PatientTable.last_name_field_name},
+                            {PatientTable.phone_field_name},
+                            {PatientTable.email_field_name},
                             {PatientTable.medic_id_field_name}) 
                             VALUES (?,?,?,?,?)''',
             (patient.first_name, patient.last_name, patient.phone, patient.email, patient.medic_id,)

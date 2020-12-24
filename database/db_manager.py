@@ -20,6 +20,10 @@ class DatabaseManager(metaclass=Singleton):
         self.category_table = CategoryTable()
         self.patient_table = PatientTable()
 
+    def get_by_table_name(self, table_name):
+        for table in vars(self).values():
+            if table.table_name == table_name:
+                return table
     # @staticmethod
     # def get_medic_table() -> MedicTable:
     #     return MedicTable()
