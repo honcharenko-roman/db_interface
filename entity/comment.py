@@ -1,14 +1,20 @@
 class Comment(object):
 
-    def __init__(self, medic_id=None, timestamp=None, content=None):
+    def __init__(self, medic_id=None, timestamp=None, content=None, data_tuple=None):
         self._id = None
-        self._medic_id = medic_id
         self._timestamp = timestamp
         self._content = content
+        self._medic_id = medic_id
+        if data_tuple:
+            self.id, self.timestamp, self.content, self.medic_id = data_tuple
 
     @property
     def id(self):
         return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @id.deleter
     def id(self):

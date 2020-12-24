@@ -7,9 +7,9 @@ from entity.comment import Comment
 class CommentTable(Table, metaclass=Singleton):
     table_name: str = 'Comment'
     _id_field_name: str = 'id'
-    medic_id_field_name: str = 'medic_id'
-    _timestamp_field_name = 'date'
+    _timestamp_field_name = 'timestamp'
     _content_field_name: str = 'content'
+    medic_id_field_name: str = 'medic_id'
 
     def __init__(self):
         super().__init__(CommentTable.table_name)
@@ -33,3 +33,9 @@ class CommentTable(Table, metaclass=Singleton):
                 VALUES (?,?,?)''',
             (comment.medic_id, comment.timestamp, comment.content)
         )
+
+    def get_all(self):
+        comments = []
+        for comment in super().get_all():
+            comments.append(Comment(data_tuple=comment))
+        return comments

@@ -40,3 +40,8 @@ class PatientTable(Table, metaclass=Singleton):
             (patient.first_name, patient.last_name, patient.phone, patient.email, patient.medic_id,)
         )
 
+    def get_all(self):
+        patients = []
+        for patient in super().get_all():
+            patients.append(Patient(data_tuple=patient))
+        return patients

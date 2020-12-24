@@ -1,5 +1,4 @@
 import contextlib
-from pathlib import Path
 import sqlite3 as sql
 
 DB_NAME: str = f'/home/roman/dasha_kurs/data.db'
@@ -21,3 +20,7 @@ def execute_statement(query: str, values=None):
             with contextlib.closing(connection.cursor()) as cursor:
                 cursor.execute(query, values) if values else cursor.execute(query)
                 return cursor.fetchall()
+
+
+def to_dataset(object):
+    pass

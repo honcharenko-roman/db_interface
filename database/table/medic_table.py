@@ -17,7 +17,8 @@ class MedicTable(Table, metaclass=Singleton):
         super().__init__(MedicTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {MedicTable.table_name} (
-                        {MedicTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,                        {MedicTable._first_name_field_name} TEXT, 
+                        {MedicTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        {MedicTable._first_name_field_name} TEXT, 
                         {MedicTable._last_name_field_name} TEXT, 
                         {MedicTable._phone_field_name} TEXT, 
                         {MedicTable._email_field_name} TEXT, 
@@ -38,3 +39,9 @@ class MedicTable(Table, metaclass=Singleton):
                         VALUES (?,?,?,?,?)''',
             (medic.first_name, medic.last_name, medic.phone, medic.email, medic.category_id,)
         )
+
+    def get_all(self):
+        medics = []
+        for medic in super().get_all():
+            medics.append(Medic(data_tuple=medic))
+        return medics

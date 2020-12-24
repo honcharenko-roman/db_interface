@@ -25,3 +25,9 @@ class CategoryTable(Table, metaclass=Singleton):
                 VALUES (?)''',
             (category.name,)
         )
+
+    def get_all(self):
+        categories = []
+        for category in super().get_all():
+            categories.append(Category(data_tuple=category))
+        return categories
