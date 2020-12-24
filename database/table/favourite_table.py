@@ -29,15 +29,3 @@ class FavouriteTable(Table, metaclass=Singleton):
                 VALUES (?,?)''',
             (medic_id, patient_id)
         )
-
-    @staticmethod
-    def drop_table():
-        execute_statement(
-            f'DROP TABLE if exists {FavouriteTable.table_name}'
-        )
-
-    @staticmethod
-    def get_all():
-        return execute_statement(
-            f'SELECT * FROM {FavouriteTable.table_name}',
-        ) or []

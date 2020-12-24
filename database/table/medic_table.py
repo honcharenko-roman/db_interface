@@ -38,10 +38,3 @@ class MedicTable(Table, metaclass=Singleton):
                         VALUES (?,?,?,?,?)''',
             (medic.first_name, medic.last_name, medic.phone, medic.email, medic.category_id,)
         )
-
-#
-# @staticmethod
-# def drop_table():
-#     execute_statement(
-#         f'DROP TABLE if exists {MedicTable.table_name}'
-#     )

@@ -25,15 +25,3 @@ class CategoryTable(Table, metaclass=Singleton):
                 VALUES (?)''',
             (category.name,)
         )
-
-    @staticmethod
-    def drop_table():
-        execute_statement(
-            f'DROP TABLE if exists {CategoryTable.table_name}'
-        )
-
-    @staticmethod
-    def get_all():
-        return execute_statement(
-            f'SELECT * FROM {CategoryTable.table_name}',
-        ) or []

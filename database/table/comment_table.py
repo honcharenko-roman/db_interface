@@ -33,15 +33,3 @@ class CommentTable(Table, metaclass=Singleton):
                 VALUES (?,?,?)''',
             (comment.medic_id, comment.timestamp, comment.content)
         )
-
-    @staticmethod
-    def drop_table():
-        execute_statement(
-            f'DROP TABLE if exists {CommentTable.table_name}'
-        )
-
-    @staticmethod
-    def get_all():
-        return execute_statement(
-            f'SELECT * FROM {CommentTable.table_name}',
-        ) or []
