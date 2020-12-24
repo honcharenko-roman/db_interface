@@ -11,3 +11,8 @@ class Table:
         execute_statement(
             f'DROP TABLE if exists {self.table_name}'
         )
+
+    def get_all(self):
+        return execute_statement(
+            f'SELECT * FROM {self.table_name}',
+        ) or []
