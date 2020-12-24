@@ -1,9 +1,10 @@
 from database.db_util import Singleton, execute_statement
 from database.table.medic_table import MedicTable
+from database.table.table import Table
 from entity.patient import Patient
 
 
-class PatientTable(metaclass=Singleton):
+class PatientTable(Table, metaclass=Singleton):
     table_name: str = 'Patient'
     id_field_name: str = 'id'
     _first_name_field_name: str = 'first_name'
@@ -13,6 +14,7 @@ class PatientTable(metaclass=Singleton):
     medic_id_field_name: str = 'medic_id'
 
     def __init__(self):
+        super().__init__(PatientTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {PatientTable.table_name} (
                 {PatientTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,17 +26,6 @@ class PatientTable(metaclass=Singleton):
                     REFERENCES {MedicTable.table_name} ({MedicTable.id_field_name})
             )'''
         )
-
-    #     FOREIGN
-    #     KEY({PatientTable.id_field_name})
-    #     REFERENCES
-    #     {MedicTable.table_name}({MedicTable.id_field_name})
-    #
-    #
-    # FOREIGN
-    # KEY({PatientTable.id_field_name})
-    # REFERENCES
-    # {FavouriteTable.table_name}({FavouriteTable.patient_id_field_name})
 
     @staticmethod
     def insert(patient: Patient):
@@ -49,9 +40,3 @@ class PatientTable(metaclass=Singleton):
             (patient.first_name, patient.last_name, patient.phone, patient.email, patient.medic_id,)
         )
 
-    #
-    # @staticmethod
-    # def drop_table():
-    #     execute_statement(
-    #         f'DROP TABLE if exists {MedicTable.table_name}'
-    #     )

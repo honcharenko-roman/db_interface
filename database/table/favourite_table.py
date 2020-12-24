@@ -1,14 +1,16 @@
 from database.db_util import Singleton, execute_statement
 from database.table.medic_table import MedicTable
 from database.table.patient_table import PatientTable
+from database.table.table import Table
 
 
-class FavouriteTable(metaclass=Singleton):
+class FavouriteTable(Table, metaclass=Singleton):
     table_name: str = 'Favourite'
     medic_id_field_name: str = 'medic_id'
     patient_id_field_name: str = 'patient_id'
 
     def __init__(self):
+        super().__init__(FavouriteTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {FavouriteTable.table_name} (
                 {FavouriteTable.medic_id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT

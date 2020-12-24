@@ -1,9 +1,10 @@
 from database.db_util import Singleton, execute_statement
 from database.table.medic_table import MedicTable
+from database.table.table import Table
 from entity.comment import Comment
 
 
-class CommentTable(metaclass=Singleton):
+class CommentTable(Table, metaclass=Singleton):
     table_name: str = 'Comment'
     _id_field_name: str = 'id'
     medic_id_field_name: str = 'medic_id'
@@ -11,6 +12,7 @@ class CommentTable(metaclass=Singleton):
     _content_field_name: str = 'content'
 
     def __init__(self):
+        super().__init__(CommentTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {CommentTable.table_name} (
                 {CommentTable._id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,

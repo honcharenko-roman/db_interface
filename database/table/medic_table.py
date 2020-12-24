@@ -1,9 +1,10 @@
 from database.db_util import Singleton, execute_statement
 from database.table.category_table import CategoryTable
+from database.table.table import Table
 from entity.medic import Medic
 
 
-class MedicTable(metaclass=Singleton):
+class MedicTable(Table, metaclass=Singleton):
     table_name: str = 'Medic'
     id_field_name: str = 'id'
     _first_name_field_name: str = 'first_name'
@@ -13,6 +14,7 @@ class MedicTable(metaclass=Singleton):
     category_id_field_name: str = 'category_id'
 
     def __init__(self):
+        super().__init__(MedicTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {MedicTable.table_name} (
                         {MedicTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,                        {MedicTable._first_name_field_name} TEXT, 
