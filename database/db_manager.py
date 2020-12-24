@@ -14,11 +14,11 @@ class DatabaseManager(metaclass=Singleton):
     patient_table: PatientTable
 
     def __init__(self):
-        medic_table = MedicTable()
-        favourite_table = FavouriteTable()
-        comment_table = CommentTable()
-        category_table = CategoryTable()
-        patient_table = PatientTable()
+        self.medic_table = MedicTable()
+        self.favourite_table = FavouriteTable()
+        self.comment_table = CommentTable()
+        self.category_table = CategoryTable()
+        self.patient_table = PatientTable()
 
     # @staticmethod
     # def get_medic_table() -> MedicTable:

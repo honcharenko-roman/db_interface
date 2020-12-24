@@ -1,30 +1,27 @@
 from database.db_util import Singleton, execute_statement
-from database.table.medic_table import MedicTable
-from entity.comment import Comment
+from entity.category import Category
 
 
 class CategoryTable(metaclass=Singleton):
     table_name: str = 'Category'
-    _id_field_name: str = 'id'
-    _name_id_field_name: str = 'medic_id'
+    id_field_name: str = 'id'
+    _name_id_field_name: str = 'name'
 
     def __init__(self):
         execute_statement(
             f'''CREATE TABLE if not exists {CategoryTable.table_name} (
-                {CategoryTable._id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
-                {CategoryTable._name_id_field_name} TEXT,
-                FOREIGN KEY ({CategoryTable._id_field_name})
-                    REFERENCES {MedicTable.table_name} ({MedicTable.category_id_field_name}) 
+                {CategoryTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
+                {CategoryTable._name_id_field_name} TEXT
             )'''
         )
 
     @staticmethod
-    def insert(comment: Comment):
+    def insert(category: Category):
         execute_statement(
             f'''INSERT INTO {CategoryTable.table_name} 
                 ({CategoryTable._name_id_field_name}) 
-                VALUES (?,)''',
-            comment.data()
+                VALUES (?)''',
+            (category.name,)
         )
 
     @staticmethod
