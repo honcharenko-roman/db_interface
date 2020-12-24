@@ -5,7 +5,7 @@ from database.table.favourite_table import FavouriteTable
 
 class MedicTable(metaclass=Singleton):
     table_name: str = 'Medic'
-    _id_field_name: str = 'id'
+    id_field_name: str = 'id'
     _first_name_field_name: str = 'first_name'
     _last_name_field_name = 'last_name'
     _phone_field_name = 'phone'
@@ -15,15 +15,15 @@ class MedicTable(metaclass=Singleton):
     def __init__(self):
         execute_statement(
             f'''CREATE TABLE if not exists {MedicTable.table_name} (
-                        {MedicTable._id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
+                        {MedicTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
                         {MedicTable._first_name_field_name} TEXT, 
                         {MedicTable._last_name_field_name} TEXT, 
                         {MedicTable._phone_field_name} TEXT, 
                         {MedicTable._email_field_name} TEXT, 
                         {MedicTable.category_id_field_name} INTEGER, 
-                        FOREIGN KEY ({MedicTable._id_field_name})
+                        FOREIGN KEY ({MedicTable.id_field_name})
                                 REFERENCES {CommentTable.table_name} ({CommentTable.medic_id_field_name}) 
-                        FOREIGN KEY ({MedicTable._id_field_name})
+                        FOREIGN KEY ({MedicTable.id_field_name})
                                 REFERENCES {FavouriteTable.table_name} ({FavouriteTable.medic_id_field_name}) 
                     )'''
         )

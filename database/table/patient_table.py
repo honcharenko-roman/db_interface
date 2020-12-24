@@ -1,6 +1,7 @@
 from database.db_util import Singleton, execute_statement
 from database.table.comment_table import CommentTable
 from database.table.favourite_table import FavouriteTable
+from database.table.medic_table import MedicTable
 
 
 class PatientTable(metaclass=Singleton):
@@ -22,7 +23,7 @@ class PatientTable(metaclass=Singleton):
                 {PatientTable._email_field_name} TEXT, 
                 {PatientTable._medic_id_field_name} INTEGER, 
                 FOREIGN KEY ({PatientTable._id_field_name})
-                        REFERENCES {CommentTable.table_name} ({CommentTable.medic_id_field_name}) 
+                        REFERENCES {MedicTable.table_name} ({MedicTable.medic_id_field_name}) 
                 FOREIGN KEY ({PatientTable._id_field_name})
                         REFERENCES {FavouriteTable.table_name} ({FavouriteTable.patient_id_field_name}) 
             )'''
