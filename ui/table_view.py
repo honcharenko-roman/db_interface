@@ -13,8 +13,7 @@ class TableView(QTableWidget):
     def setData(self):
         self.clear()
         self.setColumnCount(len(self.data.keys()))
-        # TODO fix
-        self.setRowCount(len(list(self.data.keys())[0]))
+        self.setRowCount(len(list(self.data.values())[0]))
 
         horHeaders = []
         for n, key in enumerate(sorted(self.data.keys())):

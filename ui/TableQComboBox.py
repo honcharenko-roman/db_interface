@@ -9,3 +9,4 @@ class TableComboBox(QComboBox):
         self.addItem('Comment')
         self.addItem('Category')
         self.activated[str].connect(onChangeMethod)
+        self.adjustSize()

@@ -2,7 +2,6 @@ import os
 import sys
 
 from PyQt5.QtWidgets import QApplication, QVBoxLayout
-from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QWidget
 
 from database.db_manager import DatabaseManager
@@ -32,26 +31,15 @@ def main():
         table_view.setData()
 
     c = TableComboBox(onChangedTableQComboBox)
-    layout = QVBoxLayout()
-    c.adjustSize()
-    table_view.adjustSize()
-    layout.addWidget(c)
 
+    layout = QVBoxLayout()
+    layout.addWidget(c)
     layout.addWidget(table_view)
+
     window.setLayout(layout)
     window.show()
 
     sys.exit(app.exec_())
-
-
-# def to_dataset(database_all, table):
-#     data = {}
-#
-#     for item in database_all:
-#         for key in vars(item).keys():
-#             data[key[1:]] = table.get_column_values(key[1:])
-#
-#     return data
 
 
 def insert_data():
@@ -74,10 +62,4 @@ if __name__ == '__main__':
     os.remove("/home/roman/dasha_kurs/data.db")
     db_manager = DatabaseManager()
     insert_data()
-    print(db_manager.comment_table.get_dataset())
-    print(db_manager.get_by_table_name('Medic'))
-    # print(to_dataset(db_manager.comment_table.get_all(), db_manager.comment_table))
-    # result = db_manager.comment_table.get_all()
-    # print(result)
-    # print(db_manager.comment_table.get_column_values(db_manager.comment_table.timestamp_field_name))
     main()
