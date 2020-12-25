@@ -6,6 +6,7 @@ class Table:
 
     def __init__(self, table_name):
         self.table_name = table_name
+        self.id_field_name = 'id'
 
     def drop_table(self):
         execute_statement(
@@ -30,3 +31,9 @@ class Table:
                 data[key[1:]] = self.get_column_values(key[1:])
 
         return data
+
+    def remove_by_id(self, id_to_delete):
+        execute_statement(
+            f'DELETE FROM {self.table_name} WHERE {self.id_field_name}=?',
+            (id_to_delete,)
+        )

@@ -13,7 +13,7 @@ class FavouriteTable(Table, metaclass=Singleton):
         super().__init__(FavouriteTable.table_name)
         execute_statement(
             f'''CREATE TABLE if not exists {FavouriteTable.table_name} (
-                {FavouriteTable.medic_id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT
+                {FavouriteTable.medic_id_field_name} INTEGER 
                     REFERENCES {MedicTable.table_name} ({MedicTable.id_field_name}),
                 {FavouriteTable.patient_id_field_name} INTEGER
                     REFERENCES {PatientTable.table_name} ({PatientTable.id_field_name})

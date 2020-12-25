@@ -1,7 +1,7 @@
 import contextlib
 import sqlite3 as sql
 
-DB_NAME: str = f'/home/roman/dasha_kurs/data.db'
+DB_NAME: str = f'/home/roman/db_interface/data.db'
 
 
 class Singleton(type):
