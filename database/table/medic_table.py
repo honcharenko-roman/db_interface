@@ -45,3 +45,10 @@ class MedicTable(Table, metaclass=Singleton):
         for medic in super().get_all():
             medics.append(Medic(data_tuple=medic))
         return medics
+
+    def get_by_category(self, category_id):
+        return execute_statement(
+            f'SELECT * FROM {self.table_name}'
+            f'WHERE ({self.category_id_field_name})=?',
+            (category_id,)
+        ) or []

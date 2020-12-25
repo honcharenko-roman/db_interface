@@ -24,6 +24,7 @@ class DatabaseManager(metaclass=Singleton):
         for table in vars(self).values():
             if table.table_name == table_name:
                 return table
+
     # @staticmethod
     # def get_medic_table() -> MedicTable:
     #     return MedicTable()

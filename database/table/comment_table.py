@@ -16,7 +16,7 @@ class CommentTable(Table, metaclass=Singleton):
         execute_statement(
             f'''CREATE TABLE if not exists {CommentTable.table_name} (
                 {CommentTable.id_field_name} INTEGER PRIMARY KEY AUTOINCREMENT,
-                {CommentTable.timestamp_field_name} timestamp,
+                {CommentTable.timestamp_field_name} TEXT,
                 {CommentTable.content_field_name} TEXT,
                 {CommentTable.medic_id_field_name} INTEGER
                      REFERENCES {MedicTable.table_name} ({MedicTable.id_field_name})

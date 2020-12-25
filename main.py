@@ -1,8 +1,7 @@
 import os
 import sys
 
-from PyQt5 import QtCore
-from PyQt5.QtWidgets import QApplication, QVBoxLayout, QPushButton, QHBoxLayout, QCheckBox
+from PyQt5.QtWidgets import QApplication, QVBoxLayout, QPushButton, QHBoxLayout, QLineEdit
 from PyQt5.QtWidgets import QWidget
 
 from database.db_manager import DatabaseManager
@@ -11,6 +10,7 @@ from entity.comment import Comment
 from entity.medic import Medic
 from entity.patient import Patient
 from ui.combo_box import TableComboBox
+from ui.form_layout import Dialog
 from ui.table_view import TableView
 
 
@@ -23,6 +23,7 @@ def main():
     window.setWindowTitle('Bendas Daria/Course Project')
     window.resize(800, 600)
 
+    dialog = Dialog(db_manager.medic_table)
     table_view = TableView()
 
     add_button = QPushButton('Add', parent=window)
@@ -35,9 +36,17 @@ def main():
 
         onChangedTableQComboBox(combo_box.currentText())
 
-
     def handleAddButton(self):
-        print(table_view.checked_id)
+        combo_box.currentText()
+        table = db_manager.get_by_table_name(combo_box.currentText())
+        dialog = Dialog(table)
+        dialog.exec_()
+        for key, qline in dialog.edits.items():
+            print(key, qline.text())
+        table.insert_dict(dialog.edits)
+
+        onChangedTableQComboBox(combo_box.currentText())
+
 
     def onChangedTableQComboBox(value: str):
         table_view.clear()
@@ -120,4 +129,6 @@ if __name__ == '__main__':
     os.remove("/home/roman/db_interface/data.db")
     db_manager = DatabaseManager()
     insert_data()
+    # db_manager.patient_table.get_fields()
+    # db_manager.medic_table.get_fields()
     main()

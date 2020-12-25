@@ -37,3 +37,24 @@ class Table:
             f'DELETE FROM {self.table_name} WHERE {self.id_field_name}=?',
             (id_to_delete,)
         )
+
+    def get_fields(self):
+        members = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
+        members.remove('table_name')
+        _list = []
+        # return [eval(f'self.{member}') for member in members]
+        for member in members:
+            _list.append(eval(f'self.{member}'))
+        return _list
+
+    def insert_dict(self, name_qline_dict):
+        request = ''
+        request += f'INSERT INTO {self.table_name}('
+        for key, value in name_qline_dict.items():
+            request += f'{key},'
+        request = request[:-1] + ') VALUES (' + ('?,' * len(name_qline_dict.keys()))
+        request = request[:-1] + ')'
+        execute_statement(
+            request,
+            tuple([value.text() for value in name_qline_dict.values()])
+        )
